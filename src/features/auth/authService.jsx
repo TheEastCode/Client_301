@@ -1,38 +1,20 @@
-import axios from 'axios'
+import { useAuth0 } from '@auth0/auth0-react';
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api/users/`;
+const useAuth = () => {
+  const { loginWithRedirect, logout } = useAuth0();
 
-// Register user
-const register = async (userData) => {
-  const response = await axios.post(API_URL, userData)
+  const login = () => {
+    loginWithRedirect();
+  };
 
-  if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data))
-  }
+  const logoutUser = () => {
+    logout({ returnTo: window.location.origin });
+  };
 
-  return response.data
-}
+  return {
+    login,
+    logoutUser, 
+  };
+};
 
-// Login user
-const login = async (userData) => {
-  const response = await axios.post(API_URL + 'login', userData)
-
-  if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data))
-  }
-
-  return response.data
-}
-
-// Logout user
-const logout = () => {
-  localStorage.removeItem('user')
-}
-
-const authService = {
-  register,
-  logout,
-  login,
-}
-
-export default authService
+export default useAuth;

@@ -1,38 +1,38 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import GoalForm from '../components/GoalForm'
-import GoalItem from '../components/GoalItem'
-import Spinner from '../components/Spinner'
-import { getAllGoals, reset } from '../features/goals/goalSlice'
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import GoalForm from '../components/GoalForm';
+import GoalItem from '../components/GoalItem';
+import Spinner from '../components/Spinner';
+import { getAllGoals, reset } from '../features/goals/goalSlice';
 
-function AllGoals() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+function Comments() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.auth)
-  const { goals, isLoading, isError, message } = useSelector(
-    (state) => state.goals
-  )
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const { goals, isLoading, isError, message } = useSelector((state) => state.goals);
 
   useEffect(() => {
-    if (isError) {
-      console.log(message)
+    if (!isAuthenticated) {
+      navigate('/login');
     }
 
-    if (!user) {
-      navigate('/login')
+    if (isAuthenticated) {
+      dispatch(getAllGoals());
     }
-
-    dispatch(getAllGoals())
 
     return () => {
-      dispatch(reset())
-    }
-  }, [user, navigate, isError, message, dispatch])
+      dispatch(reset());
+    };
+  }, [isAuthenticated, navigate, dispatch]);
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return <div>Error: {message}</div>;
   }
 
   return (
@@ -56,7 +56,7 @@ function AllGoals() {
         )}
       </section>
     </>
-  )
+  );
 }
 
-export default AllGoals
+export default Comments;
