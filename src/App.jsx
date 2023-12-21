@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -7,11 +7,10 @@ import { withAuth0 } from '@auth0/auth0-react';
 import NewHeader from './components/NewHeader'
 import NewGoalForm from './components/NewGoalForm'
 import Dashboard from './pages/Dashboard'
-// import Comments from './pages/Comments'
-// import Login from './pages/Login'
-// import Register from './pages/Register'
+// import Snake from './pages/Snake'
 
 function App({ auth0 }) {
+
   return (
     <>
       <Router>
@@ -19,10 +18,13 @@ function App({ auth0 }) {
         <div className='container'>
           <Routes>
             <Route path='/' element={<Dashboard auth0={auth0} />} />
-            {auth0.isAuthenticated && <Route path='/goalForm' element={<NewGoalForm />} />}
-            {/* {auth0.isAuthenticated && <Route path='/game' element={<SnakeGame />} />} */}
-            {/* {auth0.isAuthenticated && <Route path='/publicGoals' element={<PublicGoals />} /> } */}
-            {/* {auth0.isAuthenticated && <Route path='/about' element={<About />} /> } */}
+            {auth0.isAuthenticated && (
+              <>
+                <Route path='/goalForm' element={<NewGoalForm auth0={auth0} />} />
+                {/* <Route path='/snakeGame' element={<Snake />} />
+                <Route path='/about' element={<About />} /> */}
+              </>
+            )}
           </Routes>
         </div>
       </Router>
