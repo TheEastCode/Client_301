@@ -533,7 +533,7 @@ h3 {
 #rotating-words {
   display: flex;
   align-items: center;
-  font-size: 44px;
+  font-size: 74px;
  
 }
 
@@ -563,7 +563,7 @@ h3 {
 /* Needed somewhere to put this button while working on the animation. it was in the way */
 .login-button {
   position: absolute;
-  top: 20px; 
-  right: 20px;
+  top: 10px; 
+  right: 10px;
 }
 

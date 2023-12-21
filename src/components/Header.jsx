@@ -1,9 +1,8 @@
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar,  Nav, NavDropdown } from 'react-bootstrap';
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, reset } from '../features/auth/authSlice';
-import Login from '../Auth/Login'
+
 
 function Header() {
   const { user } = useSelector((state) => state.auth);
@@ -23,6 +22,9 @@ function Header() {
             <Nav className="me-auto">
               <Nav.Link className="nav-words" as={Link} to="/">
                 Home
+              </Nav.Link>
+              <Nav.Link className="nav-words" as={Link} to="/">
+                About
               </Nav.Link>
               <NavDropdown
                 className="nav-words"
