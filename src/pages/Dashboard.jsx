@@ -1,56 +1,62 @@
-import { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
-import { withAuth0 } from '@auth0/auth0-react';
-import AuthButtons from '../Auth/AuthButtons';
-import fetchData from '../utils/fetchData';
-import deleteData from '../utils/deleteData';
+import { useState, useEffect } from 'react'
+import { Button, ButtonGroup } from 'react-bootstrap'
+import { withAuth0 } from '@auth0/auth0-react'
+import AuthButtons from '../Auth/AuthButtons'
+import fetchData from '../utils/fetchData'
+import deleteData from '../utils/deleteData'
+import NewGoalForm from '../components/NewGoalForm'
 
 const GOALS_API = '/api/goals'
 
 function Dashboard({ auth0 }) {
-  const [goalData, setGoalData] = useState(null);
+  const [goalData, setGoalData] = useState(null)
   // ========= useEffect TO CONTINUOUSLY UPDATE DOM ========= \\
   useEffect(() => {
     handleGetData()
-  }, [auth0.isAuthenticated]);
+  }, [auth0.isAuthenticated])
 
   // ========= GET DATA HANDLER FUNCTION: FETCH DATA FROM API ========= \\
   async function handleGetData() {
     if (!auth0.isAuthenticated) {
-      console.log('User is not authenticated.');
-      return;
+      console.log('User is not authenticated.')
+      return
     }
     try {
-      const claim = await auth0.getIdTokenClaims();
+      const claim = await auth0.getIdTokenClaims()
       if (!claim) {
-        console.log('Token claim is undefined.');
-        return;
+        console.log('Token claim is undefined.')
+        return
       }
-      const token = claim.__raw;
-      const response = await fetchData(token, GOALS_API);
-      localStorage.setItem('goalData', JSON.stringify(response));
-      setGoalData(response);
+      const token = claim.__raw
+      const response = await fetchData(token, GOALS_API)
+      localStorage.setItem('goalData', JSON.stringify(response))
+      setGoalData(response)
     } catch (error) {
-      console.error('Error fetching data from DB. Received:', error);
+      console.error('Error fetching data from DB. Received:', error)
     }
   }
 
   // ========= DELETE DATA HANDLER FUNCTION: FETCH DATA FROM API ========= \\
   async function handleDeleteData(goalId) {
     if (!auth0.isAuthenticated) {
-      console.log('User is not authenticated.');
-      return;
+      console.log('User is not authenticated.')
+      return
     }
     try {
-      const claim = await auth0.getIdTokenClaims();
+      const claim = await auth0.getIdTokenClaims()
       if (!claim) {
-        console.log('Token claim is undefined.');
-        return;
+        console.log('Token claim is undefined.')
+        return
       }
-      const token = claim.__raw;
-      const response = await deleteData(token, `${GOALS_API}/${goalId}`);
+      const token = claim.__raw
+      const response = await deleteData(token, `${GOALS_API}/${goalId}`)
+
+      if (response.status === 200) {
+        const updatedGoals = goalData.filter((goal) => goal._id !== goalId)
+        setGoalData(updatedGoals)
+      }
     } catch (error) {
-      console.error('Error fetching data from DB. Received:', error);
+      console.error('Error fetching data from DB. Received:', error)
     }
   }
 
@@ -62,15 +68,21 @@ function Dashboard({ auth0 }) {
         {auth0.isAuthenticated && (
           <>
             <h3>Your Goals Dashboard</h3>
+            <NewGoalForm auth0={auth0} handleGetData={handleGetData} />
             {
               Array.isArray(goalData) && goalData.map((d) =>
                 <ul key={d._id}>
                   <li className='goal-text'>{d.description}</li>
                   <li className='goal-status'><i>{d.status}</i></li>
                   <li className='goal-status'>
-                    <Button variant='danger' onClick={() => handleDeleteData(d._id)}>
-                      Delete
-                    </Button>
+                    <ButtonGroup aria-label="Basic example">
+                      <Button variant='danger' onClick={() => handleDeleteData(d._id)}>
+                        Delete
+                      </Button>
+                      <Button variant='success'>
+                        Mark Complete
+                      </Button>
+                    </ButtonGroup>
                   </li>
                 </ul>
               )

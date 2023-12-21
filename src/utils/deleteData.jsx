@@ -11,7 +11,7 @@ const fetchData = async (token, path) => {
 
     try {
         const response = await axios.delete(`${API_URL}${path}`, config);
-        return response.data;
+        return response
     } catch (error) {
         console.error('Error fetching data:', error);
         throw error;
