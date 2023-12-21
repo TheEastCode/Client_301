@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
-import AuthButtons from '../Auth/AuthButtons';
 import fetchData from '../utils/fetchData';
 import deleteData from '../utils/deleteData';
 
@@ -56,7 +55,6 @@ function Dashboard({ auth0 }) {
 
   return (
     <>
-      <AuthButtons />
       <section className='heading'>
         {auth0.isAuthenticated && (
           <>

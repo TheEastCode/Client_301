@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from 'react-bootstrap';
 import '../../src/index.css';
 
-const rotatingWords = ['Hard', "Can't", 'Later', 'Ease'];
+function Login() {
+  const [index, setIndex] = useState(0)
+  const [rotatingWords, setRotatingWords] = useState([])
+  const { isAuthenticated, loginWithRedirect } = useAuth0()
 
-function Login({index}) {
+  setRotatingWords(['Hard', "Can't", 'Later', 'Ease'])
 
-  
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
-  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex(prevIndex => (
+        prevIndex + 1 >= rotatingWords.length ? 0 : prevIndex + 1
+      ));
+    }, 1000);
+    return () => clearInterval(interval)
+  }, [rotatingWords])
+
   function handleLogin() {
     loginWithRedirect();
   }
