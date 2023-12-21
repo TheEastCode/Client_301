@@ -70,7 +70,7 @@ function Dashboard() {
       nickname: 'Happy',
       name: 'happy@example.com',
       picture:
-        'https://via.placeholder.com/150',
+        'mountains.jpg',
       updated_at: '2023-12-20T18:30:03.315Z',
       email: 'happy@example.com',
       description: 'Working on being cheerful all day!',
@@ -80,7 +80,7 @@ function Dashboard() {
       nickname: 'Grumpy',
       name: 'grumpy@example.com',
       picture:
-        'https://via.placeholder.com/150',
+        'mountains.jpg',
       updated_at: '2023-12-21T10:30:00.000Z',
       email: 'grumpy@example.com',
       description: 'Complaining about everything!',
@@ -90,7 +90,7 @@ function Dashboard() {
       nickname: 'Sleepy',
       name: 'sleepy@example.com',
       picture:
-        'https://via.placeholder.com/150',
+        'mountains.jpg',
       updated_at: '2023-12-22T08:00:00.000Z',
       email: 'sleepy@example.com',
       description: 'Need more sleep...',
@@ -100,7 +100,7 @@ function Dashboard() {
       nickname: 'Bashful',
       name: 'bashful@example.com',
       picture:
-        'https://via.placeholder.com/150',
+        'mountains.jpg',
       updated_at: '2023-12-23T15:45:00.000Z',
       email: 'bashful@example.com',
       description: 'Shy and reserved, but working on it!',
@@ -110,7 +110,7 @@ function Dashboard() {
       nickname: 'Sneezy',
       name: 'sneezy@example.com',
       picture:
-        'https://via.placeholder.com/150',
+        'mountains.jpg',
       updated_at: '2023-12-24T12:20:00.000Z',
       email: 'sneezy@example.com',
       description: 'Constantly dealing with allergies!',
@@ -120,7 +120,7 @@ function Dashboard() {
       nickname: 'Dopey',
       name: 'dopey@example.com',
       picture:
-        'https://via.placeholder.com/150',
+        'mountains.jpg',
       updated_at: '2023-12-25T09:10:00.000Z',
       email: 'dopey@example.com',
       description: 'Clumsy but always trying!',
@@ -130,7 +130,7 @@ function Dashboard() {
       nickname: 'Doc',
       name: 'doc@example.com',
       picture:
-        'https://via.placeholder.com/150',
+        'mountains.jpg',
       updated_at: '2023-12-26T11:30:00.000Z',
       email: 'doc@example.com',
       description: 'The wise one in the group!',
@@ -161,11 +161,10 @@ function Dashboard() {
   return (
     <div className='dashboard'>
 
-      <div className='sidebar'>
+      <div className='sidebar shadow-lg'>
         {/* Left side navigation */}
         <div className='sidebar-header'>
-          <h1>GoalEase</h1>
-          <p>Welcome, {userName}</p>
+          <h3>Welcome {userName}</h3>
         </div>
         <nav className='sidebar-nav'>
           <ul>
@@ -187,27 +186,26 @@ function Dashboard() {
     
       <main className='main-content'>
         <header className='header'>
-          {/* Your header content here */}
-          <h1>Dashboard</h1>
-          <Button variant='success' onClick={handleAddGoal}>
+          {/* My header content here */}
+          <h1 className='mydash'>My Dashboard</h1>
+          <Button variant="outline-primary" onClick={handleAddGoal}>
             Add Goal
           </Button>
         </header>
 
         <section className='heading'>
-          {/* Your card display section */}
-          <Row xs={1} md={2} lg={3} className='g-4'>
+          {/* My card display section */}
+          <Row xs={1} md={1} lg={3} className='g-4 shadow-md'>
             {userData.map((goal, idx) => (
               <Col key={idx}>
                 <Card style={{ width: '18rem' }}>
-                  {/* Assuming picture in userData can be used as Card.Img */}
                   <Card.Img variant='top' src={goal.picture} />
                   <Card.Body>
                     <Card.Title>{goal.nickname}</Card.Title>
                     <Card.Text>{goal.description}</Card.Text>
                     {/* Button to add tasks */}
                     <Button
-                      variant='primary'
+                      variant='secondary button-secondary'
                       onClick={() => handleAddTask(goal)}
                     >
                       Add Task

@@ -215,7 +215,7 @@ h3 {
 
 /* Reset Styles */
 * {
-  margin: 0;
+  margin: 0px;
   padding: 0;
   box-sizing: border-box;
 }
@@ -227,24 +227,27 @@ body {
   display: flex;
   justify-content: center; 
   align-items: center; 
-  background-color: ;
+  background-color: #181819;
 }
 
 a {
   text-decoration: none;
-  color: #000;
+  color: rgb(191, 190, 190);
 }
 
 p {
-  line-height: 1.7;
+  line-height: 2.0;
+  color: rgb(191, 190, 190);
 }
+
+
 
 ul {
   list-style: none;
 }
 
 li {
-  line-height: 2.2;
+  line-height: 3.2;
 }
 
 h1,
@@ -252,15 +255,16 @@ h2,
 h3 {
   font-weight: 600;
   margin-bottom: 10px;
+  color: white;
 }
 
-/* .container {
+.container {
   width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
+  /* margin-left: 150px; */
+  /* margin: 0 auto; */
   padding: 0 20px;
-  text-align: center;
-} */
+  /* text-align: center; */
+}
 
 
 
@@ -271,19 +275,25 @@ h3 {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 1px solid #e6e6e6;
-  margin-bottom: 40px;
+  padding: 30px 0;
+  border-bottom: 1px solid #a9a9b2;
+  box-shadow: inset 0px 0 200px #212529,
+  rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  /* margin-bottom: 30px; */
+}
+
+.mydash{
+  margin-bottom: 20px;
 }
 
 .heading {
   display: flex;
-  margin-left: 50px;
   padding: 20px;
-  background-color: #191f2b;
-  color: #fff;
+  background-color: #212529;
   margin-top: 30px;
   width: 100%;
+  box-shadow:rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .heading h1 {
@@ -308,13 +318,37 @@ h3 {
 
 .content .card {
   margin: 10px;
-  background-color: #222a37;
+  background-color: #161719;
   color: #fff;
   justify-content: center;
 }
 
+.button-secondary:hover {
+  background-color: blue;
+  border-color: blue;
+  color: white;
+}
+
 .card{
   margin: 10px auto;
+  border: none;
+  box-shadow: 2px 2px 2px blue;
+}
+
+
+
+.card-body {
+  background-color: rgb(9, 9, 9);
+}
+
+
+.card-title {
+  color: #ccc;
+}
+
+
+.card-text {
+  color: rgb(138, 226, 5);
 }
 
 .content .card-body {
@@ -328,13 +362,13 @@ h3 {
 }
 
 .content .card-text {
-  color: #e0e0e0;
+  /* color: #e0e0e0; */
 }
 
 
 .goals {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2. 1fr);
   gap: 10px;
 }
 
@@ -358,13 +392,13 @@ h3 {
 .dashboard {
   display: flex;
   height: 100vh;
-
+  padding-top: 30px;
 }
 
 .sidebar {
   width: 250px;
-  background-color: #f0f0f0;
-  padding: 20px;
+  background-color: #212529;
+  padding: 60px 0;
   position: fixed;
   top: 50px;
   left: 0;
@@ -375,7 +409,9 @@ h3 {
   margin-top: 30px;
   flex: 1;
   padding: 20px;
-  overflow-y: auto; 
+  overflow-y: scroll;  
+  overflow-x: visible;
+  margin-right: -250px;
 }
 
 .container {
@@ -388,7 +424,7 @@ h3 {
 
 /* left navigation */
 .sidebar-header {
-  margin-bottom: 20px;
+  margin-bottom: 100px;
   font-weight: bold;
 }
 
@@ -399,7 +435,43 @@ h3 {
 }
 
 .sidebar-nav li {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.nav-words {
+  color: rgb(191, 190, 190);
+}
+
+/* the goalease wording witchcraft*/
+.nav-brand {
+  font-size: 30px;
+  font-weight: bold;
+  position: relative; 
+  color: transparent; 
+}
+
+.nav-brand::after {
+  content: 'Ease'; 
+  color: rgb(138, 226, 5); 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
+  position: absolute;
+  top: 0; 
+  left: 71px; 
+}
+
+
+.nav-brand::before {
+  content: 'Goal'; 
+  color: blue; 
+  text-shadow: 4px 2px 4px rgba(0, 0, 0, 0.4);
+  position: absolute; 
+  top: 0;
+  left: 0; 
+}
+
+
+.navbar .nav-words > .nav-link {
+  color: rgb(191, 190, 190);
 }
 
 
@@ -411,14 +483,48 @@ h3 {
   z-index: 1000; 
 } */
 
-/* 
-.sidebar-right {
-  width: calc(100px); 
-  background-color: #f0f0f0;
-  padding: 20px;
+.loadingSpinnerContainer {
   position: fixed;
   top: 0;
   right: 0;
-  height: 100vh;
-} */
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #000 transparent #555 transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .form {
+    width: 90%;
+  }
+
+  .heading h1 {
+    font-size: 2rem;
+  }
+
+  .heading p {
+    font-size: 1.5rem;
+  }
+}
 
