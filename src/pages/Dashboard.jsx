@@ -58,7 +58,7 @@ function Dashboard({ auth0 }) {
     <>
       <AuthButtons />
       <section className='heading'>
-        {auth0.isAuthenticated ? <h1>Welcome {auth0.user.nickname}</h1> : <h1>Welcome To GoalEase</h1>}
+        {/* {auth0.isAuthenticated ? <h1>Welcome {auth0.user.nickname}</h1> : <h1>Welcome To GoalEase</h1>} */}
         {auth0.isAuthenticated && (
           <>
             <h3>Your Goals Dashboard</h3>
