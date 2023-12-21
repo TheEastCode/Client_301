@@ -1,38 +1,35 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import GoalForm from '../components/GoalForm'
-import GoalItem from '../components/GoalItem'
-import Spinner from '../components/Spinner'
-import { getAllGoals, reset } from '../features/goals/goalSlice'
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Row, Col, Card } from 'react-bootstrap'; // Import Bootstrap components
+import Spinner from '../components/Spinner';
+import { getAllGoals, reset } from '../features/goals/goalSlice';
 
 function AllGoals() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.auth)
-  const { goals, isLoading, isError, message } = useSelector(
-    (state) => state.goals
-  )
+  const { user } = useSelector((state) => state.auth);
+  const { goals, isLoading, isError, message } = useSelector((state) => state.goals);
 
   useEffect(() => {
     if (isError) {
-      console.log(message)
+      console.log(message);
     }
 
     if (!user) {
-      navigate('/login')
+      navigate('/login');
     }
 
-    dispatch(getAllGoals())
+    dispatch(getAllGoals());
 
     return () => {
-      dispatch(reset())
-    }
-  }, [user, navigate, isError, message, dispatch])
+      dispatch(reset());
+    };
+  }, [user, navigate, isError, message, dispatch]);
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   return (
@@ -42,21 +39,26 @@ function AllGoals() {
         <p>Comments Dashboard</p>
       </section>
 
-      <GoalForm />
-
-      <section className='content'>
+      <Row xs={1} md={2} lg={3} xl={4} className='g-4'> 
         {goals.length > 0 ? (
-          <div className='goals'>
-            {goals.map((goal) => (
-              <GoalItem key={goal._id} goal={goal} />
-            ))}
-          </div>
+          goals.map((goal) => (
+            <Col key={goal._id}>
+              <Card>
+                <Card.Body>
+                  <Card.Title>{goal.title}</Card.Title>
+                  <Card.Text>{goal.description}</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))
         ) : (
-          <h3>There are no goals set</h3>
+          <Col>
+            <h3>There are no goals set</h3>
+          </Col>
         )}
-      </section>
+      </Row>
     </>
-  )
+  );
 }
 
-export default AllGoals
+export default AllGoals;

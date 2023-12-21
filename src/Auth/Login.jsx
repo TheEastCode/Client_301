@@ -14,7 +14,7 @@ function Login() {
   }
 
   return !isAuthenticated &&
-    <Button onClick={handleLogin}>Log in</Button>
+    <Button onClick={handleLogin} className='login-button'>Log in</Button>
     ;
 }
 export default Login;
