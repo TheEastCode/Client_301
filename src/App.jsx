@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -11,23 +11,37 @@ import Login from './Auth/Login.jsx'
 // import Snake from './pages/Snake'
 
 
-function App({ auth0 }) {
 
+
+
+function App({ auth0 }) {
+  const [index, setIndex] = useState(0);
+  const [rotatingWords, setRotatingWords] = useState(['Hard', "Can't", 'Later', 'Ease']);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex(prevIndex => (prevIndex + 1 >= rotatingWords.length ? 0 : prevIndex + 1));
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+  
   return (
     <>
+            <Login index={index} rotatingWords={rotatingWords}/>
       <Router>
         <NewHeader />
         <div className='container'>
           <Routes>
-            <Route path='/' element={<Dashboard auth0={auth0} />} />
             {auth0.isAuthenticated && (
               <>
-                <Route path='/goalForm' element={<NewGoalForm auth0={auth0} />} />
-                <Route path='/login' element={<Login auth0={auth0} />} />
+              
+              <Route path='/' element={<Dashboard auth0={auth0} />} />
+              <Route path='/goalForm' element={<NewGoalForm auth0={auth0} />} />
 
               
-                {/* <Route path='/snakeGame' element={<Snake />} />
-                <Route path='/about' element={<About />} /> */}
+                {/* <Route path='/snakeGame' element={<Snake />} /> */}
+                <Route path='/about' element={<About />} />
               </>
             )}
           </Routes>
