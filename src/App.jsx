@@ -41,34 +41,36 @@
 
 // export default withAuth0(App);
 
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useAuth0 } from '@auth0/auth0-react';
 import Dashboard from './pages/Dashboard';
 import AuthButtons from './Auth/AuthButtons.jsx';
 import Header from './components/Header.jsx';
+import Login from './Auth/Login.jsx'; // Import the Login component
 
 function App() {
+  const { isAuthenticated } = useAuth0();
+
   return (
     <Router>
-    <>
-    <Header />
-
-      {/* AUTHBUTTON FOR AUTH0 LOGIN */}
-      <AuthButtons />
-
-      
+      <>
+        <Header />
+        <AuthButtons />
         <div className='container'>
           <Routes>
-            {/* <Route path='/' element={<Dashboard auth0={auth0} />} /> */}
-            <Route path='/' element={<Dashboard />} /> {/* No authentication check */}
+            {/* Show the Dashboard if authenticated, otherwise show the Login component */}
+            <Route
+              path='/'
+              element={isAuthenticated ? <Dashboard /> : <Login />}
+            />
           </Routes>
         </div>
-      
-      <ToastContainer />
-    </>
-  </Router>
+        <ToastContainer />
+      </>
+    </Router>
   );
 }
 

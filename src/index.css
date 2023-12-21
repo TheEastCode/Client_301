@@ -528,3 +528,42 @@ h3 {
   }
 }
 
+/* Login Animation*/
+
+#rotating-words {
+  display: flex;
+  align-items: center;
+  font-size: 44px;
+ 
+}
+
+#goal-text {
+  color: blue; 
+}
+
+#rotating-word {
+  color: rgb(138, 226, 5); 
+  margin-left: 5px; 
+}
+
+
+.fadeOut {
+  animation: fadeOutAnimation 1s forwards; 
+}
+
+@keyframes fadeOutAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Needed somewhere to put this button while working on the animation. it was in the way */
+.login-button {
+  position: absolute;
+  top: 20px; 
+  right: 20px;
+}
+
