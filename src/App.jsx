@@ -1,44 +1,34 @@
-// import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { withAuth0 } from '@auth0/auth0-react';
 import Header from './components/Header.jsx';
-
-import Dashboard from './pages/Dashboard'
-// import Comments from './pages/Comments'
-// import Login from './pages/Login'
-// import Register from './pages/Register'
+import Dashboard from './pages/Dashboard';
 import AuthButtons from './Auth/AuthButtons.jsx';
+import { UserProvider } from './Auth/UserContext'; 
+
 
 function App({ auth0 }) {
-  // useEffect(() => {
-  //   if(auth0.isAuthenticated) {
-  //     getDogs();
-  //   }
-  // }, [auth0.isAuthenticated]);
+    return (
+        <UserProvider>
+            <>
+                {/* AUTHBUTTON FOR AUTH0 LOGIN */}
+                <AuthButtons />
 
-  return (
-    <>
-      {/* AUTHBUTTON FOR AUTH0 LOGIN */}
-      <AuthButtons />
-
-      <Router>
-        <div className='container'>
-          <Header />
-          <Routes>
-            {auth0.isAuthenticated && <Route path='/' element={<Dashboard auth0={auth0} />} />}
-            {/* {auth0.isAuthenticated && <Route path='/comments' element={<Comments />} />}
-            {auth0.isAuthenticated && <Route path='/login' element={<Login />} />}
-            {auth0.isAuthenticated && <Route path='/register' element={<Register />} />} */}
-          </Routes>
-        </div>
-      </Router>
-      <ToastContainer />
-    </>
-  );
+                <Router>
+                    <div className='container'>
+                        <Header />
+                        <Routes>
+                            {auth0.isAuthenticated && <Route path='/' element={<Dashboard auth0={auth0} />} />}
+                            {/* Other routes */}
+                        </Routes>
+                    </div>
+                </Router>
+                <ToastContainer />
+            </>
+        </UserProvider>
+    );
 }
 
 export default withAuth0(App);
-
-

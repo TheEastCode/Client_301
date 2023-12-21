@@ -194,7 +194,7 @@ function Dashboard() {
         </header>
 
         <section className='heading'>
-          {/* My card display section */}
+    
           <Row xs={1} md={1} lg={3} className='g-4 shadow-md'>
             {userData.map((goal, idx) => (
               <Col key={idx}>

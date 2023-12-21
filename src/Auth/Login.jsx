@@ -22,17 +22,21 @@
 
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useUser } from './UserContext';
 import { Button } from 'react-bootstrap';
 import '../../src/index.css';
 
 const rotatingWords = ['Hard', "Can't", 'Later', 'Ease'];
 
 function Login() {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated } = useUser(); 
+  const { login } = useUser(); 
   const [index, setIndex] = useState(0);
 
   function handleLogin() {
-    loginWithRedirect();
+      if (!isAuthenticated) {
+          login(); 
+      }
   }
 
   useEffect(() => {

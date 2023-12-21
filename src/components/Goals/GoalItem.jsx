@@ -28,7 +28,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteGoal } from '../../features/goals/goalSlice';
 import { createTask } from '../../features/tasks/taskSlice'; // Import the task creation action
-import './goal.css';
+
 
 function GoalItem({ goal }) {
   const dispatch = useDispatch();
