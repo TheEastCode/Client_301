@@ -70,7 +70,7 @@ function Dashboard() {
       nickname: 'Happy',
       name: 'happy@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-20T18:30:03.315Z',
       email: 'happy@example.com',
       description: 'Working on being cheerful all day!',
@@ -80,7 +80,7 @@ function Dashboard() {
       nickname: 'Grumpy',
       name: 'grumpy@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-21T10:30:00.000Z',
       email: 'grumpy@example.com',
       description: 'Complaining about everything!',
@@ -90,7 +90,7 @@ function Dashboard() {
       nickname: 'Sleepy',
       name: 'sleepy@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-22T08:00:00.000Z',
       email: 'sleepy@example.com',
       description: 'Need more sleep...',
@@ -100,7 +100,7 @@ function Dashboard() {
       nickname: 'Bashful',
       name: 'bashful@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-23T15:45:00.000Z',
       email: 'bashful@example.com',
       description: 'Shy and reserved, but working on it!',
@@ -110,7 +110,7 @@ function Dashboard() {
       nickname: 'Sneezy',
       name: 'sneezy@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-24T12:20:00.000Z',
       email: 'sneezy@example.com',
       description: 'Constantly dealing with allergies!',
@@ -120,7 +120,7 @@ function Dashboard() {
       nickname: 'Dopey',
       name: 'dopey@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-25T09:10:00.000Z',
       email: 'dopey@example.com',
       description: 'Clumsy but always trying!',
@@ -130,7 +130,7 @@ function Dashboard() {
       nickname: 'Doc',
       name: 'doc@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-26T11:30:00.000Z',
       email: 'doc@example.com',
       description: 'The wise one in the group!',
