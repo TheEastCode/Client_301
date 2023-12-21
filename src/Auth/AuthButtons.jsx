@@ -5,7 +5,20 @@ import Logout from "./Logout";
 
 function AuthButtons() {
   const { isAuthenticated } = useAuth0();
-  return isAuthenticated ? <Logout /> : <Login />
+  const { user } = useAuth0();
+  const getLocalStore = () => { return (localStorage.getItem('user')) }
+  let storedUser
+
+  if (isAuthenticated) {
+    // LOCAL STORAGE
+    if (!getLocalStore()) {
+      localStorage.setItem('user', JSON.stringify(user))
+      storedUser = JSON.parse(getLocalStore())
+    }
+    return <Logout user={storedUser} />
+  } else {
+    return <Login />
+  }
 }
 
 export default AuthButtons;

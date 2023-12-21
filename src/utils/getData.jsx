@@ -11,6 +11,7 @@ const fetchData = async (token, path) => {
 
   try {
     const response = await axios.get(`${API_URL}${path}`, config);
+    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
