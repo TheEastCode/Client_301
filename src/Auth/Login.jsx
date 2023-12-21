@@ -25,7 +25,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from 'react-bootstrap';
 import '../../src/index.css';
 
-const rotatingWords = ['Hard', "Can't", 'Later', 'Ease', 'GoalEase'];
+const rotatingWords = ['Hard', "Can't", 'Later', 'Ease'];
 
 function Login() {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
