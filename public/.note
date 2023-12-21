@@ -11,3 +11,23 @@ exp: 1703133004,
 sub: 'auth0|657d0522a40b9613eafc6428',
 sid: 'ZXhydUSF153n5CSVU3__73DUWRYZtt7Z',
 nonce: 'ODdHdkpUNnhkfjNmOFNXUzVnMC0xcTVMQ0FsX0NIa2Q0eEVXUXFVX2JDNg=='
+
+  // async function handleCreateData() {
+    //   if (!auth0.isAuthenticated) {
+    //     console.log('User is not authenticated.');
+    //     return;
+    //   }
+    //   try {
+    //     const claim = await auth0.getIdTokenClaims();
+    //     if (!claim) {
+    //       console.log('Token claim is undefined.');
+    //       return;
+    //     }
+    //     const token = claim.__raw;
+    //     const response = await createData(token, FETCH_PATH, body = null);
+    //     localStorage.setItem('goalData', JSON.stringify(response));
+    //     setUserData(response);
+    //   } catch (error) {
+    //     console.error('Error fetching data from DB. Received:', error);
+    //   }
+    // }

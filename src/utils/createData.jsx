@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = `${import.meta.env.VITE_SERVER_URL}`;
 
-const fetchData = async (token, path) => {
+const createData = async (token, path, body) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -10,8 +10,7 @@ const fetchData = async (token, path) => {
   };
 
   try {
-    const response = await axios.get(`${API_URL}${path}`, config);
-    console.log(response.data)
+    const response = await axios.post(`${API_URL}${path}`, body, config);
     return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -19,4 +18,4 @@ const fetchData = async (token, path) => {
   }
 };
 
-export default fetchData;
+export default createData;

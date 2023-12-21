@@ -1,11 +1,34 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Button } from 'react-bootstrap';
+import createData from '../utils/createData';
 
-function NewGoalForm() {
+const POST_GOALS = '/api/goals'
+
+function NewGoalForm({ auth0 }) {
     const [text, setText] = useState('')
+
+    async function handlePostData() {
+        if (!auth0.isAuthenticated) {
+            console.log('User is not authenticated.');
+            return;
+        }
+        try {
+            const claim = await auth0.getIdTokenClaims();
+            if (!claim) {
+                console.log('Token claim is undefined.');
+                return;
+            }
+            const token = claim.__raw;
+            await createData(token, POST_GOALS, { "description": text });
+            setText('')
+        } catch (error) {
+            console.error('Error fetching data from DB. Received:', error);
+        }
+    }
 
     const onSubmit = (e) => {
         e.preventDefault()
-        setText('')
+        handlePostData();
     }
 
     return (
@@ -22,9 +45,9 @@ function NewGoalForm() {
                     />
                 </div>
                 <div className='form-group'>
-                    <button className='btn btn-block' type='submit'>
+                    <Button className='btn btn-block' type='submit'>
                         Add Goal
-                    </button>
+                    </Button>
                 </div>
             </form>
         </section>

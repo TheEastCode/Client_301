@@ -14,6 +14,7 @@ class NewHeader extends React.Component {
                         <Nav className="me-auto">
                             <Navbar.Brand><Link to="/" className="nav-link">Home</Link></Navbar.Brand>
                             <Navbar.Brand><Link to="/goalForm" className="nav-link">Goal Form</Link></Navbar.Brand>
+                            <Navbar.Brand><Link to="/snakeGame" className="nav-link">Snake Game</Link></Navbar.Brand>
                             <Navbar.Brand><Link to="/about" className="nav-link">About</Link></Navbar.Brand>
                         </Nav>
                     </Container>

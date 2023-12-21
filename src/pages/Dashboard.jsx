@@ -1,58 +1,86 @@
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
-import AuthButtons from '../Auth/AuthButtons.jsx';
-import fetchData from '../utils/getData'
-const FETCH_PATH = '/api/goals'
+import AuthButtons from '../Auth/AuthButtons';
+import fetchData from '../utils/fetchData';
+import deleteData from '../utils/deleteData';
+
+const GOALS_API = '/api/goals'
 
 function Dashboard({ auth0 }) {
-  const [userData, setUserData] = useState(null);
+  const [goalData, setGoalData] = useState(null);
+  // ========= useEffect TO CONTINUOUSLY UPDATE DOM ========= \\
+  useEffect(() => {
+    handleGetData()
+  }, [auth0.isAuthenticated]);
 
+  // ========= GET DATA HANDLER FUNCTION: FETCH DATA FROM API ========= \\
   async function handleGetData() {
     if (!auth0.isAuthenticated) {
       console.log('User is not authenticated.');
       return;
     }
     try {
-      let claim = await auth0.getIdTokenClaims();
+      const claim = await auth0.getIdTokenClaims();
       if (!claim) {
         console.log('Token claim is undefined.');
         return;
       }
-      let token = claim.__raw;
-      let response = await fetchData(token, FETCH_PATH);
-      setUserData(response)
-      console.log(response)
+      const token = claim.__raw;
+      const response = await fetchData(token, GOALS_API);
+      localStorage.setItem('goalData', JSON.stringify(response));
+      setGoalData(response);
     } catch (error) {
       console.error('Error fetching data from DB. Received:', error);
     }
   }
 
-  useEffect(() => {
-    if (auth0.isAuthenticated) {
-      handleGetData();
+  // ========= DELETE DATA HANDLER FUNCTION: FETCH DATA FROM API ========= \\
+  async function handleDeleteData(goalId) {
+    if (!auth0.isAuthenticated) {
+      console.log('User is not authenticated.');
+      return;
     }
-  }, [auth0.isAuthenticated]);
+    try {
+      const claim = await auth0.getIdTokenClaims();
+      if (!claim) {
+        console.log('Token claim is undefined.');
+        return;
+      }
+      const token = claim.__raw;
+      const response = await deleteData(token, `${GOALS_API}/${goalId}`);
+    } catch (error) {
+      console.error('Error fetching data from DB. Received:', error);
+    }
+  }
 
   return (
     <>
-      {/* AUTHBUTTON FOR AUTH0 LOGIN */}
       <AuthButtons />
-
       <section className='heading'>
-        {userData ? <h1>Welcome {userData.name}</h1> : <h1>Welcome To GoalEase</h1>}
-        {auth0.isAuthenticated && <h3>Goals Dashboard</h3>}
-        {auth0.isAuthenticated && <Button variant='success' onClick={handleGetData}>Get Your Goals</Button>}
-
-        {
-          Array.isArray(userData) && userData.map((d, idx) => {
-            return <p key={d._id}> {d.description} </p>
-          })
-        }
+        {auth0.isAuthenticated ? <h1>Welcome {auth0.user.nickname}</h1> : <h1>Welcome To GoalEase</h1>}
+        {auth0.isAuthenticated && (
+          <>
+            <h3>Your Goals Dashboard</h3>
+            {
+              Array.isArray(goalData) && goalData.map((d) =>
+                <ul key={d._id}>
+                  <li className='goal-text'>{d.description}</li>
+                  <li className='goal-status'><i>{d.status}</i></li>
+                  <li className='goal-status'>
+                    <Button variant='danger' onClick={() => handleDeleteData(d._id)}>
+                      Delete
+                    </Button>
+                  </li>
+                </ul>
+              )
+            }
+            <br />
+          </>
+        )}
       </section>
-
       <section className='content'>
-        {userData && userData.length === 0 && <h3>You have not set any goals</h3>}
+        {goalData && goalData.length === 0 && <h3>You have not set any goals</h3>}
       </section>
     </>
   )
