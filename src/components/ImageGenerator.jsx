@@ -1,39 +1,36 @@
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
 
-const ImageGenerator = () => {
-    const [inputWord, setInputWord] = useState('');
+const ImageGenerator = ({ goalInput }) => {
     const [generatedImage, setGeneratedImage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
-    const handleInputChange = (e) => {
-        setInputWord(e.target.value);
-    };
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleGenerateImage = async () => {
-        const API_KEY = `${import.meta.env.DALL_API_KEY}`
-        const URL = 'https://api.openai.com/v1/davinci/images'
-
+        if (!goalInput) {
+            setErrorMessage('Please enter a goal');
+            return;
+        }
+        setErrorMessage('');
         setIsLoading(true);
+        const API_KEY = `${import.meta.env.DALL_API_KEY}`;
+        const URL = '/api/generate-dalle-image'; // Endpoint on your backend
 
         try {
-            const response = await axios.post(`${URL}`,
-                {
-                    prompt: inputWord
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${API_KEY}`,
-                    }
+            const response = await axios.post(URL, {
+                prompt: goalInput
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${API_KEY}`
                 }
-            );
+            });
 
-            const imageData = response.data;
-            setGeneratedImage(imageData.url);
+            // Assuming the API returns the image URL in response.data.image_url
+            setGeneratedImage(response.data.image_url);
         } catch (error) {
-            console.error('error generating image: ', error.message);
-            // Optionally, handle user notification here
+            console.error('Error generating image: ', error.message);
+            setErrorMessage('Failed to generate image. Please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -41,19 +38,16 @@ const ImageGenerator = () => {
 
     return (
         <div>
-            <input type="text" value={inputWord} onChange={handleInputChange} />
-            <button onClick={handleGenerateImage} disabled={isLoading}>
-                {isLoading ? 'Generating...' : 'Generate Image'}
-            </button>
-
+            {/* Your existing JSX for input, button, loading indicator, error message */}
+            
             {generatedImage && (
                 <div>
                     <p>Generated Image:</p>
-                    <img src={generatedImage} alt={`Generated from: ${inputWord}`} />
+                    <img src={generatedImage} alt={`Generated from: ${goalInput}`} />
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default ImageGenerator;

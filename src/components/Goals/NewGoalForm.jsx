@@ -9,6 +9,8 @@ function NewGoalForm({ auth0, handleGetData }) {
     const [status, setStatus] = useState('Private')
     const [tasks, setTasks] = useState([])
     const [taskInput, setTaskInput] = useState('')
+/* editing the handlepostdata function to trigger the image generation process upon adding a new goal*/    
+
 
     async function handlePostData() {
         if (!auth0.isAuthenticated) {
@@ -25,19 +27,38 @@ function NewGoalForm({ auth0, handleGetData }) {
             const claim = await auth0.getIdTokenClaims()
             if (!claim) {
                 console.log('Token claim is undefined.')
-                return
+                return;
             }
-            const token = claim.__raw
+            const token = claim.__raw;
+
+        // First, generate the DALL-E image based on the user's goal input
+        const API_KEY = `${import.meta.env.DALL_API_KEY}`;
+        const URL = '/api/generate-dalle-image'; // Endpoint on your backend for DALL-E image generation
+
+        const response = await axios.post(URL, {
+            prompt: text // Use the goal input as the prompt for DALL-E image generation
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${API_KEY}`
+            }
+        });
+
+        // Assuming the API returns the image URL in response.data.image_url
+        const generatedImage = response.data.image_url;
+
+
             console.log(tasks)
             await createData(token, POST_GOALS, {
                 "description": text,
                 "status": status,
                 "tasks": tasks.map(task => {
                     return {
-                        name: task
-                    }
-                })
-            })
+                 name: task
+                }
+            }),
+            "image": generatedImage // Include the generated image URL in the goal data
+        });
             setText('')
             setTasks([])
             handleGetData()
