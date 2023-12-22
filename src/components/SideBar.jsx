@@ -1,4 +1,5 @@
 import React from 'react'
+import ImageGenerator from './ImageGenerator'
 
 function SideBar({ auth0, handleShowGoalModal }) {
 
@@ -23,6 +24,7 @@ function SideBar({ auth0, handleShowGoalModal }) {
                         <a href='#'>Play Snake</a>
                     </li>
                 </ul>
+                <ImageGenerator auth0={auth0} />
             </nav>
         </div>
     )

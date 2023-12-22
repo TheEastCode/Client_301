@@ -61,7 +61,6 @@ function AddTaskForm({ auth0, handleGetData, goal, handleCloseAddTaskModal }) {
     const onAddTask = (e) => {
         // Check if the key pressed is 'Enter'
         if (e.key === 'Enter') {
-            e.preventDefault()
             if (taskInput !== '') {
                 setTasks([...tasks, taskInput.trim()])
             }
