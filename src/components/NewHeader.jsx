@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
-
 const NewHeader = ({ auth0 }) => {
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0()
 
@@ -68,6 +67,4 @@ const NewHeader = ({ auth0 }) => {
     );
 };
 
-export default NewHeader;
-
-
+export default NewHeader
