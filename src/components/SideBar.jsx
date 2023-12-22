@@ -13,18 +13,19 @@ function SideBar({ auth0, handleShowGoalModal }) {
                 <ul>
                     {/* Navigation links */}
                     <li>
-                        <a href='#' onClick={handleShowGoalModal}>
+                        <a href='/' onClick={handleShowGoalModal}>
                             Add New Goal
                         </a>
                     </li>
                     <li>
-                        <a href='#'>Add Comment</a>
+                        <a href='/comments'>Add Comment</a>
                     </li>
                     <li>
-                        <a href='#'>Play Snake</a>
+                        <a href='/snake'>Play Snake</a>
                     </li>
                 </ul>
-                <ImageGenerator auth0={auth0} />
+                {/* <ImageGenerator auth0={auth0} /> */}
+
             </nav>
         </div>
     )
