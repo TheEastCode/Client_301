@@ -1,0 +1,33 @@
+nickname: 'ekowyawson71',
+name: 'ekowyawson71@gmail.com',
+picture: 'https://s.gravatar.com/avatar/bbbfd67668efe70d9da5297ea63b86f1?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fek.png',
+updated_at: '2023-12-20T18:30:03.315Z',
+email: 'ekowyawson71@gmail.com',
+email_verified: false,
+iss: 'https://dev-d5x0dk0xll4rajfv.us.auth0.com/',
+aud: 'PsrUJpFOGeQsvmEteMBMNnLfvozF8FSv',
+iat: 1703097004,
+exp: 1703133004,
+sub: 'auth0|657d0522a40b9613eafc6428',
+sid: 'ZXhydUSF153n5CSVU3__73DUWRYZtt7Z',
+nonce: 'ODdHdkpUNnhkfjNmOFNXUzVnMC0xcTVMQ0FsX0NIa2Q0eEVXUXFVX2JDNg=='
+
+  // async function handleCreateData() {
+    //   if (!auth0.isAuthenticated) {
+    //     console.log('User is not authenticated.');
+    //     return;
+    //   }
+    //   try {
+    //     const claim = await auth0.getIdTokenClaims();
+    //     if (!claim) {
+    //       console.log('Token claim is undefined.');
+    //       return;
+    //     }
+    //     const token = claim.__raw;
+    //     const response = await createData(token, FETCH_PATH, body = null);
+    //     localStorage.setItem('goalData', JSON.stringify(response));
+    //     setUserData(response);
+    //   } catch (error) {
+    //     console.error('Error fetching data from DB. Received:', error);
+    //   }
+    // }
