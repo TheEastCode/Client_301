@@ -27,13 +27,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteGoal } from '../../features/goals/goalSlice';
-import { createTask } from '../../features/tasks/taskSlice'; // Import the task creation action
+import { createTask } from '../../features/tasks/taskSlice'; 
 
 
 function GoalItem({ goal }) {
   const dispatch = useDispatch();
   const [showTaskForm, setShowTaskForm] = useState(false);
-  const [taskText, setTaskText] = useState(''); // State to handle task input
+  const [taskText, setTaskText] = useState(''); 
 
   const onDelete = () => {
     dispatch(deleteGoal(goal._id));
@@ -41,7 +41,7 @@ function GoalItem({ goal }) {
 
   const onSubmitTask = (e) => {
     e.preventDefault();
-    dispatch(createTask({ goalId: goal._id, text: taskText })); // Dispatch action to create a task
+    dispatch(createTask({ goalId: goal._id, text: taskText })); 
     setTaskText('');
   };
 

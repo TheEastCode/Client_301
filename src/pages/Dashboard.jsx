@@ -70,7 +70,7 @@ function Dashboard() {
       nickname: 'Happy',
       name: 'happy@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-20T18:30:03.315Z',
       email: 'happy@example.com',
       description: 'Working on being cheerful all day!',
@@ -80,7 +80,7 @@ function Dashboard() {
       nickname: 'Grumpy',
       name: 'grumpy@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-21T10:30:00.000Z',
       email: 'grumpy@example.com',
       description: 'Complaining about everything!',
@@ -90,7 +90,7 @@ function Dashboard() {
       nickname: 'Sleepy',
       name: 'sleepy@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-22T08:00:00.000Z',
       email: 'sleepy@example.com',
       description: 'Need more sleep...',
@@ -100,7 +100,7 @@ function Dashboard() {
       nickname: 'Bashful',
       name: 'bashful@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-23T15:45:00.000Z',
       email: 'bashful@example.com',
       description: 'Shy and reserved, but working on it!',
@@ -110,7 +110,7 @@ function Dashboard() {
       nickname: 'Sneezy',
       name: 'sneezy@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-24T12:20:00.000Z',
       email: 'sneezy@example.com',
       description: 'Constantly dealing with allergies!',
@@ -120,7 +120,7 @@ function Dashboard() {
       nickname: 'Dopey',
       name: 'dopey@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-25T09:10:00.000Z',
       email: 'dopey@example.com',
       description: 'Clumsy but always trying!',
@@ -130,7 +130,7 @@ function Dashboard() {
       nickname: 'Doc',
       name: 'doc@example.com',
       picture:
-        'public/mountains.jpg',
+        'mountains.jpg',
       updated_at: '2023-12-26T11:30:00.000Z',
       email: 'doc@example.com',
       description: 'The wise one in the group!',
@@ -171,14 +171,14 @@ function Dashboard() {
             {/* Navigation links */}
             <li>
               <a href='#' onClick={handleAddGoal}>
-                Make A New Goal
+                Add New Goal
               </a>
             </li>
             <li>
-              <a href='#'>Play Snake Game</a>
+            <a href='#'>Add Comment</a>
             </li>
             <li>
-              <a href='#'>Make A Public Comment</a>
+            <a href='#'>Play Snake</a>
             </li>
           </ul>
         </nav>
@@ -188,17 +188,17 @@ function Dashboard() {
         <header className='header'>
           {/* My header content here */}
           <h1 className='mydash'>My Dashboard</h1>
-          <Button variant="outline-primary" onClick={handleAddGoal}>
+          <Button variant="outline-primary" className='custom-button' onClick={handleAddGoal}>
             Add Goal
           </Button>
         </header>
 
-        <section className='heading'>
+         <section className='heading'>
     
-          <Row xs={1} md={1} lg={3} className='g-4 shadow-md'>
+          <Row xs={1} md={1} lg={2} xl={3} className='g-4 shadow-md'>
             {userData.map((goal, idx) => (
-              <Col key={idx}>
-                <Card style={{ width: '18rem' }}>
+              <Col key={idx} >
+                <Card style={{ width: '20rem' }}>
                   <Card.Img variant='top' src={goal.picture} />
                   <Card.Body>
                     <Card.Title>{goal.nickname}</Card.Title>
@@ -215,7 +215,10 @@ function Dashboard() {
               </Col>
             ))}
           </Row>
-        </section>
+        </section> 
+
+
+
 
         {/* Modal for adding goals and tasks */}
         <Modal show={showModal} onHide={handleCloseModal}>

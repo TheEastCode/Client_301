@@ -233,6 +233,7 @@ body {
 a {
   text-decoration: none;
   color: rgb(191, 190, 190);
+  font-size: 18px;
 }
 
 p {
@@ -323,11 +324,28 @@ h3 {
   justify-content: center;
 }
 
-.button-secondary:hover {
+/* Add Task Button */
+
+.button-secondary {
+  box-shadow: 2px 2px 1px rgb(49, 49, 49); 
+
+&:hover {
   background-color: blue;
   border-color: blue;
   color: white;
+}}
+
+/* Add Goal Button */
+.custom-button {
+  transition: color 0.3s, background-color 0.3s; 
+
+  &:hover {
+    color: rgb(138, 226, 5) !important;
+    font-weight: 600;
+    background-color: blue !important;
+  }
 }
+
 
 .card{
   margin: 10px auto;
@@ -434,8 +452,19 @@ h3 {
   margin: 0;
 }
 
+.sidebar-nav a {
+  display: block;
+  padding: 10px;
+}
+
+.sidebar-nav a:hover {
+  background-color: black;
+  font-weight: 700;
+}
+
 .sidebar-nav li {
   margin-bottom: 15px;
+  
 }
 
 .nav-words {
