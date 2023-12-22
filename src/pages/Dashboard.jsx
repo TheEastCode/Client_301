@@ -1,19 +1,30 @@
 import { useState, useEffect } from 'react'
-import { Button, ButtonGroup } from 'react-bootstrap'
+import { Button, ButtonGroup, Card, Col, Row, Modal } from 'react-bootstrap'
 import { withAuth0 } from '@auth0/auth0-react'
-import AuthButtons from '../Auth/AuthButtons'
 import fetchData from '../utils/fetchData'
 import deleteData from '../utils/deleteData'
-import NewGoalForm from '../components/NewGoalForm'
+import NewGoalForm from '../components/Goals/NewGoalForm'
 
 const GOALS_API = '/api/goals'
 
 function Dashboard({ auth0 }) {
   const [goalData, setGoalData] = useState(null)
-  // ========= useEffect TO CONTINUOUSLY UPDATE DOM ========= \\
-  useEffect(() => {
-    handleGetData()
-  }, [auth0.isAuthenticated])
+  const [showModal, setShowModal] = useState(false)
+  const [selectedGoal, setSelectedGoal] = useState(null)
+
+  const handleAddGoal = () => {
+    setShowModal(true)
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false)
+    setSelectedGoal(null)
+  };
+
+  const handleAddTask = (goal) => {
+    setSelectedGoal(goal)
+    setShowModal(true)
+  }
 
   // ========= GET DATA HANDLER FUNCTION: FETCH DATA FROM API ========= \\
   async function handleGetData() {
@@ -60,15 +71,90 @@ function Dashboard({ auth0 }) {
     }
   }
 
+  // ========= useEffect TO CONTINUOUSLY UPDATE DOM ========= \\
+  useEffect(() => {
+    handleGetData()
+  }, [auth0.isAuthenticated])
+
   return (
     <>
-      <AuthButtons />
-      <section className='heading'>
-        {auth0.isAuthenticated ? <h1>Welcome {auth0.user.nickname}</h1> : <h1>Welcome To GoalEase</h1>}
-        {auth0.isAuthenticated && (
-          <>
+      {auth0.isAuthenticated && (
+        <div className='dashboard'>
+          {/* ----- */}
+
+          <div className='sidebar shadow-lg'>
+            {/* Left side navigation */}
+            <div className='sidebar-header'>
+              <h3>Welcome {auth0.user.nickname}</h3>
+            </div>
+            <nav className='sidebar-nav'>
+              <ul>
+                {/* Navigation links */}
+                <li>
+                  <a href='#' onClick={handleAddGoal}>
+                    Add New Goal
+                  </a>
+                </li>
+                <li>
+                  <a href='#'>Add Comment</a>
+                </li>
+                <li>
+                  <a href='#'>Play Snake</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <main className='main-content'>
+            <header className='header'>
+              {/* My header content here */}
+              <h1 className='mydash'>My Dashboard</h1>
+              <Button variant="outline-primary" className='custom-button' onClick={handleAddGoal}>
+                Add Goal
+              </Button>
+            </header>
+
+            <section className='heading'>
+
+              <Row xs={1} md={1} lg={2} xl={3} className='g-4 shadow-md'>
+                {goalData && goalData.map((goal, idx) => (
+                  <Col key={idx} >
+                    <Card style={{ width: '20rem' }}>
+                      <Card.Img variant='top' src={goal.user.picture} />
+                      <Card.Body>
+                        <Card.Title>{goal.user.nickname}</Card.Title>
+                        <Card.Text>{goal.description}</Card.Text>
+                        {/* Button to add tasks */}
+                        <Button
+                          variant='secondary button-secondary'
+                          onClick={() => handleAddTask(goal)}
+                        >
+                          Add Task
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </section>
+
+            {/* Modal for adding goals and tasks */}
+            <Modal show={showModal} onHide={handleCloseModal}>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  {selectedGoal ? 'Add Task' : 'Add Goal'}
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {/* Pass necessary props to GoalForm */}
+                <NewGoalForm auth0={auth0} />
+              </Modal.Body>
+            </Modal>
+          </main>
+
+          {/* --- EKOW'S ORIGINAL MARKUP STARTS HERE --- */}
+          <section className='heading'>
             <h3>Your Goals Dashboard</h3>
-            <NewGoalForm auth0={auth0} handleGetData={handleGetData} />
             {
               Array.isArray(goalData) && goalData.map((d) =>
                 <ul key={d._id}>
@@ -88,12 +174,12 @@ function Dashboard({ auth0 }) {
               )
             }
             <br />
-          </>
-        )}
-      </section>
-      <section className='content'>
-        {goalData && goalData.length === 0 && <h3>You have not set any goals</h3>}
-      </section>
+          </section>
+          <section className='content'>
+            {goalData && goalData.length === 0 && <h3>You have not set any goals</h3>}
+          </section>
+
+        </div>)}
     </>
   )
 }

@@ -5,22 +5,26 @@ import 'react-toastify/dist/ReactToastify.css'
 import { withAuth0 } from '@auth0/auth0-react';
 
 import NewHeader from './components/NewHeader'
-import NewGoalForm from './components/NewGoalForm'
+import NewGoalForm from './components/Goals/NewGoalForm'
 import Dashboard from './pages/Dashboard'
+import Welcome from './components/Welcome'
+import ImageGenerator from './components/ImageGenerator'
 // import Snake from './pages/Snake'
 
 function App({ auth0 }) {
 
   return (
     <>
+      <Welcome />
       <Router>
-        <NewHeader />
+        <NewHeader auth0={auth0} />
         <div className='container'>
           <Routes>
             <Route path='/' element={<Dashboard auth0={auth0} />} />
             {auth0.isAuthenticated && (
               <>
                 <Route path='/goalForm' element={<NewGoalForm auth0={auth0} />} />
+                <Route path='/generate-image' element={<ImageGenerator />} />
                 {/* <Route path='/snakeGame' element={<Snake />} />
                 <Route path='/about' element={<About />} /> */}
               </>

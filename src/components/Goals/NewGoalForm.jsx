@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Button, Form } from 'react-bootstrap';
-import createData from '../utils/createData';
+import createData from '../../utils/createData';
 
 const POST_GOALS = '/api/goals'
 
 function NewGoalForm({ auth0, handleGetData }) {
     const [text, setText] = useState('')
     const [status, setStatus] = useState('Private')
+    const [tasks, setTasks] = useState([])
 
     async function handlePostData() {
         if (!auth0.isAuthenticated) {
@@ -20,11 +21,14 @@ function NewGoalForm({ auth0, handleGetData }) {
                 return;
             }
             const token = claim.__raw;
+            console.log(tasks)
             await createData(token, POST_GOALS, {
                 "description": text,
-                "status": status
-            });
+                "status": status,
+                "tasks": [tasks]
+            })
             setText('')
+            setTasks([])
             handleGetData()
         } catch (error) {
             console.error('Error fetching data from DB. Received:', error);
@@ -38,7 +42,16 @@ function NewGoalForm({ auth0, handleGetData }) {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        handlePostData();
+        handlePostData()
+    }
+
+    const onAddTask = (e) => {
+        e.preventDefault()
+        // Check if the key pressed is 'Enter'
+        if (e.key === 'Enter') {
+            setTasks(...tasks, e.target.value)
+            e.target.value = ''
+        }
     }
 
     return (
@@ -52,6 +65,15 @@ function NewGoalForm({ auth0, handleGetData }) {
                         placeholder="Enter Goal"
                         value={text}
                         onChange={(e) => setText(e.target.value)}
+                    />
+                </Form.Group>
+                <Form.Group controlId="tasks">
+                    <Form.Label>Tasks</Form.Label>
+                    <Form.Control
+                        name='tasks'
+                        type="text"
+                        placeholder="Enter tasks and press enter to save"
+                        onKeyDown={onAddTask}
                     />
                 </Form.Group>
                 <Form.Check
@@ -73,7 +95,6 @@ function NewGoalForm({ auth0, handleGetData }) {
                 <Button className='btn btn-block' type='submit'>
                     Add Goal
                 </Button>
-
             </Form>
         </section>
     )
