@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Button, ButtonGroup, Card, Col, Row, Modal } from 'react-bootstrap'
+import { Button, Card, Col, Row, Modal } from 'react-bootstrap'
 import { withAuth0 } from '@auth0/auth0-react'
 import fetchData from '../utils/fetchData'
 import deleteData from '../utils/deleteData'
@@ -12,7 +12,7 @@ function Dashboard({ auth0 }) {
   const [showModal, setShowModal] = useState(false)
   const [selectedGoal, setSelectedGoal] = useState(null)
 
-  const handleAddGoal = () => {
+  const handleShowGoalModal = () => {
     setShowModal(true)
   };
 
@@ -71,6 +71,14 @@ function Dashboard({ auth0 }) {
     }
   }
 
+  const getMappedData = (arr = []) => {
+    if (arr && arr.length !== 0) {
+      return arr.map(a => {
+        return (<li key={a._id}>{a.name}</li>)
+      })
+    }
+  }
+
   // ========= useEffect TO CONTINUOUSLY UPDATE DOM ========= \\
   useEffect(() => {
     handleGetData()
@@ -91,7 +99,7 @@ function Dashboard({ auth0 }) {
               <ul>
                 {/* Navigation links */}
                 <li>
-                  <a href='#' onClick={handleAddGoal}>
+                  <a href='#' onClick={handleShowGoalModal}>
                     Add New Goal
                   </a>
                 </li>
@@ -109,27 +117,34 @@ function Dashboard({ auth0 }) {
             <header className='header'>
               {/* My header content here */}
               <h1 className='mydash'>My Dashboard</h1>
-              <Button variant="outline-primary" className='custom-button' onClick={handleAddGoal}>
+              <Button variant="outline-primary" className='custom-button' onClick={handleShowGoalModal}>
                 Add Goal
               </Button>
             </header>
 
             <section className='heading'>
-
+              {/* DISPLAY GOALS */}
               <Row xs={1} md={1} lg={2} xl={3} className='g-4 shadow-md'>
                 {goalData && goalData.map((goal, idx) => (
                   <Col key={idx} >
                     <Card style={{ width: '20rem' }}>
                       <Card.Img variant='top' src={goal.user.picture} />
                       <Card.Body>
-                        <Card.Title>{goal.user.nickname}</Card.Title>
-                        <Card.Text>{goal.description}</Card.Text>
+                        <Card.Title>{goal.description}</Card.Title>
+                        <Card.Text> {goal.tasks ? getMappedData(goal.tasks) : null}
+                        </Card.Text>
                         {/* Button to add tasks */}
                         <Button
                           variant='secondary button-secondary'
                           onClick={() => handleAddTask(goal)}
                         >
                           Add Task
+                        </Button>
+                        <Button
+                          variant='danger button-secondary'
+                          onClick={() => handleDeleteData(goal._id)}
+                        >
+                          Delete Goal
                         </Button>
                       </Card.Body>
                     </Card>
@@ -147,14 +162,17 @@ function Dashboard({ auth0 }) {
               </Modal.Header>
               <Modal.Body>
                 {/* Pass necessary props to GoalForm */}
-                <NewGoalForm auth0={auth0} />
+                <NewGoalForm
+                  auth0={auth0}
+                  handleGetData={handleGetData}
+                  handleDeleteData={handleDeleteData}
+                />
               </Modal.Body>
             </Modal>
           </main>
 
           {/* --- EKOW'S ORIGINAL MARKUP STARTS HERE --- */}
-          <section className='heading'>
-            <h3>Your Goals Dashboard</h3>
+          {/* <section className='heading'>
             {
               Array.isArray(goalData) && goalData.map((d) =>
                 <ul key={d._id}>
@@ -177,7 +195,7 @@ function Dashboard({ auth0 }) {
           </section>
           <section className='content'>
             {goalData && goalData.length === 0 && <h3>You have not set any goals</h3>}
-          </section>
+          </section> */}
 
         </div>)}
     </>

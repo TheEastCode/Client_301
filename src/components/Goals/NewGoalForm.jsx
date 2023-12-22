@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Button, Form } from 'react-bootstrap';
-import createData from '../../utils/createData';
+import { Button, Form } from 'react-bootstrap'
+import createData from '../../utils/createData'
 
 const POST_GOALS = '/api/goals'
 
@@ -8,30 +8,41 @@ function NewGoalForm({ auth0, handleGetData }) {
     const [text, setText] = useState('')
     const [status, setStatus] = useState('Private')
     const [tasks, setTasks] = useState([])
+    const [taskInput, setTaskInput] = useState('')
 
     async function handlePostData() {
         if (!auth0.isAuthenticated) {
-            console.log('User is not authenticated.');
-            return;
+            console.log('User is not authenticated.')
+            return
         }
+
+        if (text === '') {
+            console.log('ERROR: Goal cannot be blank')
+            return
+        }
+
         try {
-            const claim = await auth0.getIdTokenClaims();
+            const claim = await auth0.getIdTokenClaims()
             if (!claim) {
-                console.log('Token claim is undefined.');
-                return;
+                console.log('Token claim is undefined.')
+                return
             }
-            const token = claim.__raw;
+            const token = claim.__raw
             console.log(tasks)
             await createData(token, POST_GOALS, {
                 "description": text,
                 "status": status,
-                "tasks": [tasks]
+                "tasks": tasks.map(task => {
+                    return {
+                        name: task
+                    }
+                })
             })
             setText('')
             setTasks([])
             handleGetData()
         } catch (error) {
-            console.error('Error fetching data from DB. Received:', error);
+            console.error('Error fetching data from DB. Received:', error)
         }
     }
 
@@ -46,11 +57,15 @@ function NewGoalForm({ auth0, handleGetData }) {
     }
 
     const onAddTask = (e) => {
-        e.preventDefault()
         // Check if the key pressed is 'Enter'
         if (e.key === 'Enter') {
-            setTasks(...tasks, e.target.value)
-            e.target.value = ''
+            e.preventDefault()
+            if (taskInput !== '') {
+                setTasks([...tasks, taskInput.trim()])
+            }
+            console.log(tasks)
+            setTaskInput('')
+            e.placeholder = 'Task Added. Press Add Goal to save'
         }
     }
 
@@ -73,7 +88,9 @@ function NewGoalForm({ auth0, handleGetData }) {
                         name='tasks'
                         type="text"
                         placeholder="Enter tasks and press enter to save"
-                        onKeyDown={onAddTask}
+                        value={taskInput}
+                        onKeyDown={(e) => onAddTask(e)}
+                        onChange={(e) => setTaskInput(e.target.value)}
                     />
                 </Form.Group>
                 <Form.Check
