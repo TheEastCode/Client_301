@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
-import { Button, ButtonGroup } from 'react-bootstrap'
-import { withAuth0 } from '@auth0/auth0-react'
-import AuthButtons from '../Auth/AuthButtons'
-import fetchData from '../utils/fetchData'
-import deleteData from '../utils/deleteData'
-import NewGoalForm from '../components/NewGoalForm'
+
+import { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
+import { withAuth0 } from '@auth0/auth0-react';
+import fetchData from '../utils/fetchData';
+import deleteData from '../utils/deleteData';
+
 
 const GOALS_API = '/api/goals'
 
@@ -62,9 +62,7 @@ function Dashboard({ auth0 }) {
 
   return (
     <>
-      <AuthButtons />
       <section className='heading'>
-        {auth0.isAuthenticated ? <h1>Welcome {auth0.user.nickname}</h1> : <h1>Welcome To GoalEase</h1>}
         {auth0.isAuthenticated && (
           <>
             <h3>Your Goals Dashboard</h3>
