@@ -23,7 +23,7 @@ function App({ auth0 }) {
         <div className='container'>
           <Routes>
             <Route path='/' element={<Dashboard auth0={auth0} />} />
-            <Route path='/comments' element={<Comments auth0={auth0} />} />
+            <Route path='comments' element={<Comments auth0={auth0} />} />
             {auth0.isAuthenticated && (
               <>
                 <Route path='/goalForm' element={<NewGoalForm auth0={auth0} />} />
