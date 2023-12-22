@@ -10,7 +10,7 @@ function Welcome() {
     useEffect(() => {
         const interval = setInterval(() => {
             setIndex(prevIndex => (prevIndex + 1 >= rotatingWords.length ? 0 : prevIndex + 1))
-        }, 2000);
+        }, 1000);
         return () => clearInterval(interval)
     }, [])
 

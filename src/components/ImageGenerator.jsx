@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { withAuth0 } from '@auth0/auth0-react'
+import fetchData from '../utils/fetchData';
 import axios from 'axios';
 
-const ImageGenerator = () => {
+const ImageGenerator = ({ auth0 }) => {
     const [inputWord, setInputWord] = useState('');
     const [generatedImage, setGeneratedImage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -11,8 +13,22 @@ const ImageGenerator = () => {
     };
 
     const handleGenerateImage = async () => {
-        const API_KEY = `${import.meta.env.DALL_API_KEY}`
-        const URL = 'https://api.openai.com/v1/davinci/images'
+        // const API_KEY = `${import.meta.env.DALL_API_KEY}`
+        const URL = `${import.meta.env.VITE_SERVER_URL}/api/dalle/generate-dalle-image`;
+        // const URL = 'https://api.openai.com/dalle/generate-dalle-image'
+        // const URL = 'https://api.openai.com/v1/davinci/images'
+
+        if (!auth0.isAuthenticated) {
+            console.log('User is not authenticated.')
+            return
+        }
+
+        const claim = await auth0.getIdTokenClaims()
+        if (!claim) {
+            console.log('Token claim is undefined.')
+            return
+        }
+        const token = claim.__raw
 
         setIsLoading(true);
 
@@ -24,7 +40,7 @@ const ImageGenerator = () => {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${API_KEY}`,
+                        Authorization: `Bearer ${token}`,
                     }
                 }
             );
@@ -49,11 +65,12 @@ const ImageGenerator = () => {
             {generatedImage && (
                 <div>
                     <p>Generated Image:</p>
-                    <img src={generatedImage} alt={`Generated from: ${inputWord}`} />
+                    {/* <img src={generatedImage} alt={`Generated from: ${inputWord}`} /> */}
+                    <p> {generatedImage} -- Generated from {inputWord} </p>
                 </div>
             )}
         </div>
     );
 }
 
-export default ImageGenerator;
+export default ImageGenerator

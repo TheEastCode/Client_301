@@ -25,7 +25,7 @@ const NewHeader = ({ auth0 }) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link className="nav-words" as={Link} to="/">
-                            Home
+                            Dashboard
                         </Nav.Link>
                         <Nav.Link className="nav-words" as={Link} to="/">
                             About
