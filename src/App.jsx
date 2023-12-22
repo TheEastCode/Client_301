@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { withAuth0 } from '@auth0/auth0-react';
+
 import About from './pages/About';
 import Comments from './pages/Comments'
 import NewHeader from './components/NewHeader';

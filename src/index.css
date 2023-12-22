@@ -1,4 +1,4 @@
- /* Global Styles */
+/* Global Styles */
 
  /* Font Import */
  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
@@ -294,14 +294,197 @@
    color: rgb(191, 190, 190);
  }
 
+.mydash{
+  margin-bottom: 20px;
+}
+
+.heading {
+  display: flex;
+  /* padding: 20px; */
+  background-color: #212529;
+  margin-top: 30px;
+  width: 100%;
+  box-shadow:rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.heading h1 {
+  margin-bottom: 10px;
+}
+
+.heading h3 {
+  margin-bottom: 20px;
+}
+
+.heading .btn-success {
+  margin-bottom: 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  flex-wrap: wrap; 
+  padding: 20px;
+}
+
+.content .card {
+  margin: 10px;
+  background-color: #161719;
+  color: #fff;
+  justify-content: center;
+}
+
+.button-secondary:hover {
+  background-color: blue;
+  border-color: blue;
+  color: white;
+}
+
+.card{
+  margin: 10px auto;
+  border: none;
+  box-shadow: 2px 2px 2px blue;
+}
 
 
- /* .login-button {
+
+.card-body {
+  background-color: rgb(9, 9, 9);
+}
+
+
+.card-title {
+  color: #ccc;
+}
+
+
+.card-text {
+  color: rgb(138, 226, 5);
+}
+
+.content .card-body {
+  padding: 15px;
+ 
+}
+
+.content .card-title {
+  color: #1652f0;
+  font-weight: bold;
+}
+
+.content .card-text {
+  /* color: #e0e0e0; */
+}
+
+
+.goals {
+  display: grid;
+  grid-template-columns: repeat(2. 1fr);
+  gap: 10px;
+}
+
+.goal {
+  background-color: #f4f4f4;
+  margin: 10px 0;
+  padding: 20px 0 10px;
+  position: relative;
+}
+
+.goal .close {
   position: absolute;
-  top: 20px;
-  right: 60px;
-  z-index: 1000; 
-} */
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+  padding-top: 30px;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #212529;
+  padding: 60px 0;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  height: 100vh;
+}
+
+.main-content {
+  margin-top: 30px;
+  flex: 1;
+  padding: 20px;
+  overflow-y: scroll;  
+  overflow-x: visible;
+  margin-right: -250px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+/* left navigation */
+.sidebar-header {
+  margin-bottom: 100px;
+  font-weight: bold;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav li {
+  margin-bottom: 15px;
+}
+
+.nav-words {
+  color: rgb(191, 190, 190);
+}
+
+/* the goalease wording witchcraft*/
+.nav-brand {
+  font-size: 30px;
+  font-weight: bold;
+  position: relative; 
+  color: transparent; 
+}
+
+.nav-brand::after {
+  content: 'Ease'; 
+  color: rgb(138, 226, 5); 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
+  position: absolute;
+  top: 0; 
+  left: 71px; 
+}
+
+
+.nav-brand::before {
+  content: 'Goal'; 
+  color: blue; 
+  text-shadow: 4px 2px 4px rgba(0, 0, 0, 0.4);
+  position: absolute; 
+  top: 0;
+  left: 0; 
+}
+
+
+.navbar .nav-words > .nav-link {
+  color: rgb(191, 190, 190);
+}
+
 
  .loadingSpinnerContainer {
    position: fixed;
@@ -380,11 +563,4 @@
    100% {
      opacity: 0;
    }
- }
-
- /* Needed somewhere to put this button while working on the animation. it was in the way */
- .login-button {
-   position: absolute;
-   top: 10px;
-   right: 10px;
  }
