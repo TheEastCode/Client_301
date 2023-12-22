@@ -4,9 +4,10 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { withAuth0 } from '@auth0/auth0-react';
 
+import Comments from './pages/Comments'
+import Dashboard from './pages/Dashboard'
 import NewHeader from './components/NewHeader'
 import NewGoalForm from './components/Goals/NewGoalForm'
-import Dashboard from './pages/Dashboard'
 import Welcome from './components/Welcome'
 import ImageGenerator from './components/ImageGenerator'
 // import Snake from './pages/Snake'
@@ -21,6 +22,7 @@ function App({ auth0 }) {
         <div className='container'>
           <Routes>
             <Route path='/' element={<Dashboard auth0={auth0} />} />
+            <Route path='/comments' element={<Comments auth0={auth0} />} />
             {auth0.isAuthenticated && (
               <>
                 <Route path='/goalForm' element={<NewGoalForm auth0={auth0} />} />

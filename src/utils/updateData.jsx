@@ -31,10 +31,6 @@ const handleUpdateData = async (path, goalId, auth0, body) => {
         }
         const token = claim.__raw
         const response = await updateData(token, `${path}/${goalId}`, body)
-
-        if (response.status === 200) {
-            console.log(response.data)
-        }
     } catch (error) {
         console.error('Error fetching data from DB. Received:', error)
     }

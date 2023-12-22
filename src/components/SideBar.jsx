@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import ImageGenerator from './ImageGenerator'
 
 function SideBar({ auth0, handleShowGoalModal }) {
@@ -18,7 +19,7 @@ function SideBar({ auth0, handleShowGoalModal }) {
                         </a>
                     </li>
                     <li>
-                        <a href='#'>Add Comment</a>
+                        <Link to='/comments'>Add Comment</Link>
                     </li>
                     <li>
                         <a href='#'>Play Snake</a>

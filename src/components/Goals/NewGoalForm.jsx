@@ -28,7 +28,6 @@ function NewGoalForm({ auth0, handleGetData }) {
                 return
             }
             const token = claim.__raw
-            console.log(tasks)
             await createData(token, POST_GOALS, {
                 "description": text,
                 "status": status,
@@ -63,7 +62,6 @@ function NewGoalForm({ auth0, handleGetData }) {
             if (taskInput !== '') {
                 setTasks([...tasks, taskInput.trim()])
             }
-            console.log(tasks)
             setTaskInput('')
             e.placeholder = 'Task Added. Press Add Goal to save'
         }

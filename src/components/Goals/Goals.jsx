@@ -55,7 +55,6 @@ function Goals({
     };
 
     const handleMarkComplete = async (e, goalId, description, status, isCompleted = false) => {
-        console.log(e.target)
 
         try {
             let data = {
@@ -65,7 +64,6 @@ function Goals({
                 isCompleted: isCompleted
             }
             const res = updateData(`/api/goals/${goalId}`, data)
-            console.log(res)
             e.target.classList.replace('btn-warning', 'btn-success')
         } catch (error) {
             console.error('Error updating data in DB. Received:', error)
@@ -85,7 +83,7 @@ function Goals({
 
             <section className='heading'>
                 {/* DISPLAY GOALS */}
-                <Row xs={1} md={1} lg={2} xl={3} className='g-4 shadow-md'>
+                <Row xs={3} md={3} lg={3} xl={3} className='g-4 shadow-md'>
                     {goalData && goalData.map((goal, idx) => (
                         <>
                             <Col key={goal._id} >

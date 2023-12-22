@@ -10,8 +10,8 @@ const createData = async (token, path, body) => {
   };
 
   try {
-    const response = await axios.post(`${API_URL}${path}`, body, config);
-    return response.data;
+    const response = await axios.post(`${API_URL}${path}`, body, config)
+    return response
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error;
