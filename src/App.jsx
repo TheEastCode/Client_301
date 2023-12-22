@@ -35,28 +35,40 @@
 
 /* Temporary bypass so that I can see and edit the <dashboard></dashboard*/
 
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import Header from './components/Header.jsx';
+// import Dashboard from './pages/Dashboard'; 
+
+// function App() {
+//     return (
+//         <Router>
+//             <div className='container'>
+//                 <Header />
+//                 <Routes>
+//                     <Route path='/' element={<Dashboard />} /> {/* Render Dashboard unconditionally */}
+//                     {/* Other routes */}
+//                 </Routes>
+//             </div>
+//             <ToastContainer />
+//         </Router>
+//     );
+// }
+
+// export default App;
+
+
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Header from './components/Header.jsx';
-import Dashboard from './pages/Dashboard'; // Import Dashboard directly without authentication
-// Other necessary imports...
+import SnakeGame from './components/Snake/SnakeGame.jsx';
 
 function App() {
-    return (
-        <Router>
-            <div className='container'>
-                <Header />
-                <Routes>
-                    <Route path='/' element={<Dashboard />} /> {/* Render Dashboard unconditionally */}
-                    {/* Other routes */}
-                </Routes>
-            </div>
-            <ToastContainer />
-        </Router>
-    );
+  return (
+      <div className="App">
+          <SnakeGame />
+      </div>
+  );
 }
 
 export default App;
-
