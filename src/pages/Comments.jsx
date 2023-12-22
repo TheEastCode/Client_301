@@ -4,8 +4,6 @@ import fetchData from '../utils/fetchData';
 import { withAuth0 } from '@auth0/auth0-react';
 // import deleteData from '../utils/deleteData'
 
-const API_URL = `${import.meta.env.VITE_SERVER_URL}`;
-
 // Comments.jsx
 const Comments = ({ auth0 }) => {
   const [comments, setComments] = useState([]);
@@ -39,7 +37,7 @@ const Comments = ({ auth0 }) => {
       }
       try {
         const token = claim.__raw
-        const response = await fetchData(token, `${API_URL}/api/comments`)
+        const response = await fetchData(token, `/api/comments`)
         if (response.status === 200) {
           return response.data
         }
@@ -63,7 +61,7 @@ const Comments = ({ auth0 }) => {
     e.preventDefault();
     if (!newComment.trim()) return;
     const postedComment = await postComment(
-      `${API_URL}/api/comments`,
+      `/api/comments`,
       { text: newComment }
     )
     if (postedComment) {
