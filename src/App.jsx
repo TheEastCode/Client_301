@@ -7,7 +7,7 @@ import { withAuth0 } from '@auth0/auth0-react';
 import NewHeader from './components/NewHeader'
 import NewGoalForm from './components/NewGoalForm'
 import Dashboard from './pages/Dashboard'
-import AuthButtons from './Auth/AuthButtons';
+import Welcome from './components/Welcome'
 // import Snake from './pages/Snake'
 
 
@@ -16,14 +16,14 @@ function App({ auth0 }) {
 
   return (
     <>
-      <AuthButtons />
+      <Welcome />
       <Router>
-        <NewHeader />
+        <NewHeader auth0={auth0} />
         <div className='container'>
           <Routes>
+            <Route path='/' element={<Dashboard auth0={auth0} />} />
             {auth0.isAuthenticated && (
               <>
-                <Route path='/' element={<Dashboard auth0={auth0} />} />
                 <Route path='/goalForm' element={<NewGoalForm auth0={auth0} />} />
                 {/* <Route path='/snakeGame' element={<Snake />} /> */}
                 {/* <Route path='/about' element={<About />} /> */}
