@@ -8,9 +8,9 @@
 -Ekow Yawson
 -Latherio Kidd
 
-## [Render Deploy Link](https://goalease.onrender.com)
+## [Render Deployed Back-End](https://goalease.onrender.com)
 
-## [Netlify Deploy Link]()
+## [Netlify Deployed Page](https://unrivaled-phoenix-f8230f.netlify.app)
 
 ## What is GoalEase Snake Edition?
 

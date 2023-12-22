@@ -9,7 +9,6 @@ import NewGoalForm from './components/Goals/NewGoalForm'
 import Dashboard from './pages/Dashboard'
 import Welcome from './components/Welcome'
 import ImageGenerator from './components/ImageGenerator'
-// import Snake from './pages/Snake'
 
 function App({ auth0 }) {
 
