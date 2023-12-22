@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { withAuth0 } from '@auth0/auth0-react';
+import Snake from './components/Snake.jsx';
 
 // import Header from './components/Header'
 import Dashboard from './pages/Dashboard'
@@ -31,6 +32,7 @@ function App({ auth0 }) {
             {/* {auth0.isAuthenticated && <Route path='/comments' element={<Comments />} />}
             {auth0.isAuthenticated && <Route path='/login' element={<Login />} />}
             {auth0.isAuthenticated && <Route path='/register' element={<Register />} />} */}
+             <Route path='/snake' element={<Snake />}/>
           </Routes>
         </div>
       </Router>

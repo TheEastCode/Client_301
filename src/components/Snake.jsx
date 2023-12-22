@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from 'react';
+function Snake() {
 
+  return (
+    <div>
+          <div className="snake-container">
+          <iframe
+            src="https://minisnake.netlify.app/game"
+            width="950"
+            height="875"
+            title="Embedded Snake Game"
+          ></iframe>
+          </div>
+    </div>
+  );
+}
 
-function MyIframeComponent() {
-    return (
-      <div>
-        <iframe
-          src="https://theeastcode.github.io/ClassicSnakeGame/"
-          width="500"
-          height="300"
-          title="Embedded Page"
-        ></iframe>
-      </div>
-    );
-  }
-  export default MyIframeComponent;
+export default Snake;
