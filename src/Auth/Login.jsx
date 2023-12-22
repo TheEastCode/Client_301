@@ -12,9 +12,9 @@ function Login() {
       setIndex(prevIndex => (
         prevIndex + 1 >= rotatingWords.length ? 0 : prevIndex + 1
       ));
-    }, 1000);
+    }, 3000);
     return () => clearInterval(interval)
-  }, [])
+  }, [rotatingWords.length])
 
 
   return (

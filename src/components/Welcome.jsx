@@ -5,14 +5,12 @@ import '../../src/index.css';
 function Welcome() {
     const [index, setIndex] = useState(0)
     const { isAuthenticated } = useAuth0()
-    const rotatingWords = useState(['Hard', "Can't", 'Later', 'Ease'])
+    const rotatingWords = ['Hard', "Can't", 'Later', 'Ease']
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setIndex(prevIndex => (
-                prevIndex + 1 >= rotatingWords.length ? 0 : prevIndex + 1
-            ));
-        }, 1000);
+            setIndex(prevIndex => (prevIndex + 1 >= rotatingWords.length ? 0 : prevIndex + 1))
+        }, 2000);
         return () => clearInterval(interval)
     }, [])
 
