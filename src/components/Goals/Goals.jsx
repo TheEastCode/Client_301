@@ -63,7 +63,7 @@ function Goals({
                 status: status,
                 isCompleted: isCompleted
             }
-            const res = updateData(`/api/goals/${goalId}`, data)
+            const res = await updateData(`/api/goals/${goalId}`, data)
             e.target.classList.replace('btn-warning', 'btn-success')
         } catch (error) {
             console.error('Error updating data in DB. Received:', error)
